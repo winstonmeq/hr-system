@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 
-import { connectToDatabase } from "@/lib/db/mongoose";
 import { requireApiPermission } from "@/lib/auth/api-guards";
 import { permissions } from "@/lib/auth/permissions";
+import { connectToDatabase } from "@/lib/db/mongoose";
 import { RoleModel } from "@/models/Role";
 
 export async function GET() {
-  const auth = await requireApiPermission(permissions.usersRead);
+  const auth = await requireApiPermission(permissions.rolesRead);
 
   if (!auth.ok) {
     return auth.response;

@@ -12,7 +12,22 @@ export const permissions = {
   usersResetPassword: "users:reset-password",
 
   rolesRead: "roles:read",
+
   auditLogsRead: "audit_logs:read",
+
+  employeesRead: "employees:read",
+  employeesCreate: "employees:create",
+  employeesUpdate: "employees:update",
+
+  leaveRead: "leave:read",
+  leaveManage: "leave:manage",
+  leaveRecommend: "leave:recommend",
+
+
+
+
+  attendanceRead: "attendance:read",
+  attendanceManage: "attendance:manage",
 
   departmentRead: "department:read",
   teamRead: "team:read",
@@ -35,25 +50,49 @@ export const rolePermissions: Record<RoleSlug, Permission[]> = {
 
     permissions.rolesRead,
     permissions.auditLogsRead,
+
+    permissions.employeesRead,
+    permissions.employeesCreate,
+    permissions.employeesUpdate,
+
+    permissions.leaveRead,
+    permissions.leaveManage,
+
+    permissions.attendanceRead,
+    permissions.attendanceManage,
   ],
 
   "department-head": [
     permissions.dashboardRead,
     permissions.departmentRead,
+    permissions.teamRead,
+    permissions.employeesRead,
+    permissions.leaveRead,
+    permissions.attendanceRead,
+    permissions.leaveRecommend,
+    permissions.attendanceRead,
   ],
 
   supervisor: [
     permissions.dashboardRead,
     permissions.teamRead,
+    permissions.employeesRead,
+    permissions.leaveRead,
+    permissions.attendanceRead,
   ],
 
   employee: [
     permissions.dashboardRead,
     permissions.profileRead,
+    permissions.leaveRead,
+    permissions.attendanceRead,
   ],
 };
 
-export function hasPermission(role: string | undefined, permission: Permission) {
+export function hasPermission(
+  role: string | undefined | null,
+  permission: Permission,
+) {
   if (!role || !(role in rolePermissions)) {
     return false;
   }
